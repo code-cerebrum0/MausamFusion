@@ -1,0 +1,137 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+:root {
+  --bg: 246 248 251;
+  --surface: 255 255 255;
+  --surface2: 240 243 248;
+  --line: 220 226 236;
+  --fg: 12 18 32;
+  --muted: 78 92 115;
+  --accent: 3 105 161;
+  --accent-fg: 255 255 255;
+  --nwp: 79 70 229;
+  --ens: 217 119 6;
+  --ai: 13 148 136;
+  --danger: 200 30 30;
+  --success: 4 120 87;
+  --warn: 154 52 18;
+  color-scheme: light;
+}
+.dark {
+  --bg: 7 11 20;
+  --surface: 13 19 32;
+  --surface2: 20 28 45;
+  --line: 36 46 66;
+  --fg: 230 236 245;
+  --muted: 152 164 186;
+  --accent: 56 189 248;
+  --accent-fg: 7 11 20;
+  --nwp: 129 140 248;
+  --ens: 245 179 66;
+  --ai: 45 212 191;
+  --danger: 248 113 113;
+  --success: 52 211 153;
+  --warn: 251 191 36;
+  color-scheme: dark;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+body {
+  @apply bg-bg font-sans text-fg antialiased;
+  overflow-x: hidden;
+}
+#root {
+  min-height: 100vh;
+}
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 2px;
+}
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+  .panel-muted {
+    @apply rounded-2xl border border-line bg-surface2;
+  }
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .input {
+    @apply w-full rounded-lg border border-line bg-surface2 px-3 py-2 text-sm text-fg placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30;
+  }
+  .atmosphere {
+    background-image: radial-gradient(ellipse 70% 55% at 75% -10%, rgb(var(--accent) / 0.12), transparent 65%),
+      radial-gradient(ellipse 50% 40% at 0% 10%, rgb(var(--nwp) / 0.09), transparent 60%);
+  }
+  .grid-lines {
+    background-image: linear-gradient(rgb(var(--line) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line) / 0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+.flow-dash {
+  stroke-dasharray: 4 6;
+  animation: flow 1.2s linear infinite;
+}
+@keyframes flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@media print {
+  :root,
+  .dark {
+    --bg: 255 255 255;
+    --surface: 255 255 255;
+    --surface2: 247 247 247;
+    --line: 200 200 200;
+    --fg: 0 0 0;
+    --muted: 60 60 60;
+    --accent: 0 70 130;
+    --accent-fg: 255 255 255;
+  }
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .panel,
+  .panel-muted {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+  .atmosphere,
+  .grid-lines {
+    background-image: none !important;
+  }
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 10px;
+  }
+}
